@@ -1,7 +1,7 @@
 import { Outlet, useParams, useLocation, Link } from "react-router-dom";
 import styles from "./Layout.module.scss";
 import Amount from "../../components/Amount/Amount";
-import { BiArrowBack } from "react-icons/bi";
+import { BiArrowBack, BiHomeAlt } from "react-icons/bi";
 
 const Layout = () => {
   const { pathname } = useLocation();
@@ -12,7 +12,7 @@ const Layout = () => {
   return (
     <main className={styles.container}>
       <nav className={styles.navbar}>
-        {isProductPage && (
+        {isProductPage ? (
           <Link to="/">
             <BiArrowBack
               style={{
@@ -20,11 +20,19 @@ const Layout = () => {
                 color: "white",
                 cursor: "pointer",
                 marginRight: "1rem",
+                verticalAlign: "middle",
               }}
             />
           </Link>
+        ) : (
+          <BiHomeAlt
+            style={{ fontSize: "1.5rem", color: "white", marginRight: "1rem" }}
+          />
         )}
-        <h1 className={styles.title}>{isProductPage ? id : "My Products"}</h1>
+
+        <h1 className={styles.title}>
+          {isProductPage ? id + " Product" : "My Products"}
+        </h1>
         <Amount />
       </nav>
       <div className={styles.content}>
