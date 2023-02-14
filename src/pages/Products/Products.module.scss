@@ -1,0 +1,4 @@
+.wrapper {
+  display: grid;
+  row-gap: clamp(1rem, 10vw, 10rem);
+}

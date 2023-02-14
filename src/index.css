@@ -11,6 +11,7 @@
   --clr-text-300: rgba(255, 255, 255, 0.6);
   --clr-text-200: rgba(255, 255, 255, 0.4);
   --clr-text-100: rgba(255, 255, 255, 0);
+  --clr-text-black: #000;
 }
 
 #root {

@@ -1,23 +1,24 @@
 import {
-  createBrowserRouter,
-  createRoutesFromElements,
+  BrowserRouter as Router,
+  Routes,
   Route,
-  RouterProvider,
+  useLocation,
 } from "react-router-dom";
 
 import Layout from "./components/Layout/Layout";
-
-const router = createBrowserRouter(
-  createRoutesFromElements([
-    <Route path="/" element={<Layout />}>
-      {/* <Route path="/" element={<Products />} /> */}
-      {/* <Route path="/product/:id" element={<Product />} /> */}
-    </Route>,
-  ])
-);
+import Products from "./pages/Products/Products";
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Products />} />
+          {/* <Route path="/product/:id" element={<Product />} /> */}
+        </Route>
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
