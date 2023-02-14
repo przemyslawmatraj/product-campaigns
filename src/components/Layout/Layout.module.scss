@@ -9,7 +9,7 @@
 
   .navbar {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     margin-bottom: 2rem;
     padding-bottom: 1.2rem;
     border-bottom: 1px solid var(--clr-text-300);
@@ -18,5 +18,8 @@
   .content {
     display: grid;
     height: fit-content;
+  }
+  .title {
+    margin-right: auto;
   }
 }
