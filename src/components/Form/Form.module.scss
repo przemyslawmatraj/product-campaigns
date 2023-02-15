@@ -1,0 +1,72 @@
+.formTitle {
+  color: var(--clr-text-400);
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-transform: capitalize;
+}
+.form {
+  width: 100%;
+  label {
+    font-size: 1.2rem;
+    color: var(--clr-text-400);
+    .input,
+    .select {
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      background-color: var(--clr-bg-300);
+      color: var(--clr-text-400);
+      font-size: 1rem;
+    }
+  }
+}
+.buttonContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.inactive {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.button {
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 18px;
+  padding: 8px 30px;
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.error {
+  color: var(--clr-primary);
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.nextButton,
+.submitButton {
+  background: var(--clr-secondary);
+  border: none;
+  color: var(--clr-text-black);
+}
+.backButton,
+.cancelButton {
+  background: transparent;
+  border: 1px solid var(--clr-secondary);
+  color: var(--clr-text-400);
+}

@@ -1,0 +1,28 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+
+  overflow-y: scroll;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.container {
+  background-color: var(--clr-bg-200);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+
+  @media screen and (min-width: 768px) {
+    max-width: 500px;
+    width: 90%;
+    margin: 0 auto;
+  }
+}

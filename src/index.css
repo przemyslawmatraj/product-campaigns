@@ -14,6 +14,10 @@
   --clr-text-black: #000;
 }
 
+div[role="presentation"].MuiAutocomplete-popper {
+  z-index: 1000000;
+}
+
 #root {
   display: flex;
   min-height: 100vh;
