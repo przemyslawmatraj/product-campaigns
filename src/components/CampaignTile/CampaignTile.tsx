@@ -3,6 +3,8 @@ import clsx from "clsx";
 import styles from "./CampaignTile.module.scss";
 import { GrFormLocation } from "react-icons/gr";
 import Switch from "../Switch/Switch";
+import CampaignContent from "../CampaignContent/CampaignContent";
+import CampaignActions from "../CampaignActions/CampaignActions";
 
 interface CampaignTileProps {
   i: number;
@@ -38,17 +40,8 @@ CampaignTileProps) => {
         <Switch active={active} />
       </Header>
       <Content isOpen={isOpen}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi
-        voluptatum numquam libero vitae! Similique facere, perspiciatis nulla
-        quis dolorum minima sequi ex quibusdam. Amet earum, quas quod repellat
-        dolor ducimus provident magni eligendi placeat ipsam natus molestias
-        alias animi. Eligendi, maxime ipsa quibusdam sit sed cum laudantium
-        repellat dignissimos, accusantium aperiam temporibus fuga voluptates,
-        qui ex natus dicta minus optio omnis explicabo earum! Aliquid alias
-        ipsam quaerat. Veritatis placeat a possimus quibusdam sapiente iure
-        commodi ab tempora magni dolorem sequi totam harum, fugit voluptates
-        reprehenderit nisi aspernatur tenetur perferendis quas error quo,
-        pariatur facere quaerat quam. Sit, cupiditate maxime! Assumenda.
+        <CampaignContent />
+        <CampaignActions />
       </Content>
     </article>
   );
@@ -84,7 +77,7 @@ const Content = ({
 }) => (
   <AnimatePresence initial={false}>
     {isOpen && (
-      <motion.p
+      <motion.div
         key="content"
         initial="collapsed"
         animate="open"
@@ -97,7 +90,7 @@ const Content = ({
         className={styles.content}
       >
         {children}
-      </motion.p>
+      </motion.div>
     )}
   </AnimatePresence>
 );

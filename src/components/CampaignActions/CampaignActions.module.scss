@@ -1,0 +1,31 @@
+.wrapper {
+  background-color: var(--clr-bg-200);
+  padding: 1rem;
+  row-gap: 1rem;
+  border-radius: 0 0 10px 10px;
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: var(--clr-text-300);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.button {
+  border: none;
+  border-radius: 10px;
+  background: var(--clr-secondary);
+  font-weight: 400;
+  color: var(--clr-text-black);
+  font-size: 18px;
+  padding: 8px 30px;
+  cursor: pointer;
+  &:first-of-type {
+    margin-right: 10px;
+    background: transparent;
+    border: 1px solid var(--clr-secondary);
+    color: var(--clr-text-400);
+  }
+}

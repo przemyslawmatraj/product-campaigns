@@ -12,14 +12,7 @@ const Product = () => {
     <section className={styles.wrapper}>
       <header className={styles.header}>
         <h1 className={styles.title}>Campaigns</h1>
-        <button
-          className={styles.button}
-          onClick={() => {
-            console.log("clicked");
-          }}
-        >
-          New
-        </button>
+        <button className={styles.button}>+</button>
       </header>
       {Array(5)
         .fill(0)
@@ -29,7 +22,7 @@ const Product = () => {
             expanded={expanded}
             setExpanded={setExpanded}
             key={i}
-            active={i === 0}
+            active={i + 1 > 0 && i < 3 ? true : false}
           />
         ))}
     </section>

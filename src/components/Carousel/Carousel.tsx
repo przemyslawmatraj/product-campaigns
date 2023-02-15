@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Carousel.module.scss";
 import useMobile from "../../hooks/useMobile";
-import clsx from "clsx";
 
 import CarouselItem from "../CarouselItem/CarouselItem";
 
@@ -20,12 +19,7 @@ const Carousel = () => {
   }, []);
 
   return (
-    <motion.div
-      ref={carouselRef}
-      className={clsx(styles.wrapper, {
-        [styles.wrapperMobile]: isMobile,
-      })}
-    >
+    <motion.div ref={carouselRef} className={styles.wrapper}>
       <motion.ul
         className={styles.carousel}
         drag="x"
@@ -42,7 +36,7 @@ const Carousel = () => {
               isMobile={isMobile}
               id={index.toString()}
               name={`Product ${index}`}
-              image={`https://thispersondoesnotexist.com/image?r=${index}`}
+              image={`https://thisrentaldoesnotexist.com/img-new/img1.jpg`}
               campaignsCount={index}
             />
           ))}

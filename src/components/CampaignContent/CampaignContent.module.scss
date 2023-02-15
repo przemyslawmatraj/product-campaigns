@@ -1,0 +1,41 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--clr-bg-200);
+  padding: 1rem;
+  row-gap: 1rem;
+  border-radius: 10px 10px 0 0;
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: var(--clr-text-300);
+}
+
+.field {
+  &Name {
+    grid-column: 1 / 3;
+  }
+  &Group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 1rem;
+  }
+  &Big {
+    width: 100%;
+  }
+}
+
+.keyword {
+  background-color: var(--clr-bg-400);
+  padding: 0.3rem 0.5rem;
+}
+
+.keywords {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}

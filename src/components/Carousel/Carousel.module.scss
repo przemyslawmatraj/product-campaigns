@@ -10,10 +10,8 @@
     inset: 0;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0) 80%, rgb(7, 7, 7) 100%);
     opacity: 1;
-  }
 
-  &Mobile {
-    &::after {
+    @media screen and (max-width: 768px) {
       background: linear-gradient(
         90deg,
         rgba(0, 0, 0, 0) 90%,
