@@ -46,7 +46,7 @@ const KeywordsField = ({
                   color: "var(--clr-text-400)",
                 },
               }}
-              placeholder="Keywords"
+              placeholder="Choose keywords"
             />
           )}
           defaultValue={defaultValues}

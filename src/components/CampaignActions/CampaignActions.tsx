@@ -1,6 +1,6 @@
 import styles from "./CampaignActions.module.scss";
 import Modal from "../Modal/Modal";
-import { useState, useId } from "react";
+import { useState } from "react";
 
 const CampaignActions = ({ campaignId }: { campaignId?: string }) => {
   const [modalOpen, setModalOpen] = useState(false);

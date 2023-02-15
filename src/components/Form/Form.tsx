@@ -5,6 +5,20 @@ import TownField from "./TownField";
 import { useState } from "react";
 import clsx from "clsx";
 
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const campaignSchema = z.object({
+  name: z.string().min(1),
+  keywords: z.array(z.string()).min(1),
+  bidAmount: z.number().min(100),
+  campaignFund: z.number(),
+  town: z.string().optional(),
+  radius: z.number().optional(),
+});
+
+type Campaign = z.infer<typeof campaignSchema>;
+
 interface FormProps {
   type: "add" | "edit";
   setModalOpen: (modalOpen: boolean) => void;
@@ -20,6 +34,7 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
     control,
   } = useForm({
     mode: "onBlur",
+    resolver: zodResolver(campaignSchema),
   });
   const [formStep, setFormStep] = useState(0);
 
@@ -47,7 +62,7 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
               type="text"
               id="name"
               className={styles.input}
-              {...register("name", { required: "Name is required" })}
+              {...register("name")}
             />
           </label>
 
@@ -78,7 +93,9 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
               type="number"
               id="bidAmount"
               className={styles.input}
-              {...register("bidAmount")}
+              {...register("bidAmount", {
+                setValueAs: (v) => (v === "" ? undefined : parseInt(v, 10)),
+              })}
             />
           </label>
 
@@ -96,7 +113,9 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
               type="number"
               id="campaignFund"
               className={styles.input}
-              {...register("campaignFund")}
+              {...register("campaignFund", {
+                setValueAs: (v) => (v === "" ? undefined : parseInt(v, 10)),
+              })}
             />
           </label>
         </>
@@ -119,7 +138,7 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
             htmlFor="radius"
             className={formStep === 1 ? styles.active : styles.inactive}
           >
-            Radius
+            Radius (in km)
             {errors.radius && (
               <p className={styles.error}>
                 {errors.radius.message?.toString()}
@@ -129,7 +148,9 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
               type="number"
               id="radius"
               className={styles.input}
-              {...register("radius", { required: "Radius is required" })}
+              {...register("radius", {
+                setValueAs: (v) => (v === "" ? undefined : parseInt(v, 10)),
+              })}
             />
           </label>
         </>
