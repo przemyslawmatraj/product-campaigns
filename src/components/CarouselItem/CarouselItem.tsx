@@ -40,7 +40,11 @@ const MobileVersion = ({
       <motion.li className={styles.item}>
         <img src={image} alt={name} className={styles.image} />
         <h2 className={styles.title}>{name}</h2>
-        <p className={styles.description}>{campaignsCount}</p>
+        <p className={styles.description}>
+          {campaignsCount > 1 || campaignsCount === 0
+            ? `${campaignsCount} campaigns`
+            : `${campaignsCount} campaign`}
+        </p>
       </motion.li>
     </Link>
   );
@@ -82,7 +86,11 @@ const DesktopVersion = ({
         )}
       </AnimatePresence>
       <h2 className={styles.title}>{name}</h2>
-      <p className={styles.description}>{campaignsCount}</p>
+      <p className={styles.description}>
+        {campaignsCount > 1 || campaignsCount === 0
+          ? `${campaignsCount} campaigns`
+          : `${campaignsCount} campaign`}
+      </p>
     </motion.li>
   );
 };

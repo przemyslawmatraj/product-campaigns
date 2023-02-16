@@ -1,31 +1,43 @@
 import styles from "./CampaignContent.module.scss";
 import clsx from "clsx";
-const CampaignContent = () => {
+
+interface CampaignContentProps {
+  bidAmount: number;
+  campaignFund: number;
+  keywords: string[];
+  name: string;
+}
+
+const CampaignContent = ({
+  bidAmount,
+  campaignFund,
+  keywords,
+  name,
+}: CampaignContentProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.fieldGroup}>
         <div className={clsx(styles.field, styles.fieldName)}>
           <div className={styles.label}>Name</div>
-          <div className={styles.value}>Campaign 1</div>
+          <div className={styles.value}>{name}</div>
         </div>
         <div className={styles.field}>
           <div className={styles.label}>Bid Amount</div>
-          <div className={styles.value}>$15,000</div>
+          <div className={styles.value}>{bidAmount}</div>
         </div>
         <div className={styles.field}>
           <div className={styles.label}>Campaign Fund</div>
-          <div className={styles.value}>$15,000</div>
+          <div className={styles.value}>{campaignFund}</div>
         </div>
       </div>
       <div className={clsx(styles.field, styles.fieldBig)}>
         <div className={styles.label}>Keywords</div>
         <div className={styles.keywords}>
-          <span className={styles.keyword}>Chair</span>
-          <span className={styles.keyword}>Table</span>
-          <span className={styles.keyword}>Lamp</span>
-          <span className={styles.keyword}>Banana</span>
-          <span className={styles.keyword}>Cat</span>
-          <span className={styles.keyword}>Dog</span>
+          {keywords.map((keyword) => (
+            <div className={styles.keyword} key={keyword}>
+              {keyword}
+            </div>
+          ))}
         </div>
       </div>
     </div>

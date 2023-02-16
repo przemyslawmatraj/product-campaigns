@@ -5,7 +5,6 @@ import { useState } from "react";
 
 const Switch = ({ active, ...props }: { active: boolean }) => {
   const [isOn, setIsOn] = useState(active);
-  console.log(isOn, active);
   return (
     <div className={styles.wrapper}>
       <motion.div

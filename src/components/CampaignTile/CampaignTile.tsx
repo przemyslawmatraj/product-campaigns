@@ -5,12 +5,13 @@ import { GrFormLocation } from "react-icons/gr";
 import Switch from "../Switch/Switch";
 import CampaignContent from "../CampaignContent/CampaignContent";
 import CampaignActions from "../CampaignActions/CampaignActions";
+import type { Campaign } from "../../api/api";
 
 interface CampaignTileProps {
   i: number;
   expanded: false | number;
   setExpanded: (i: false | number) => void;
-  active: boolean;
+  data: Campaign;
 }
 
 const child = {
@@ -31,15 +32,17 @@ const CampaignTile = ({
   i,
   expanded,
   setExpanded,
-  active,
-}: // data,
-CampaignTileProps) => {
+  data,
+}: CampaignTileProps) => {
   const isOpen = i === expanded;
+  const { status, name, town, radius, bidAmount, campaignFund, keywords } =
+    data;
+
   return (
     <motion.article variants={child} className={styles.wrapper}>
-      <Header isOpen={isOpen} setExpanded={setExpanded} i={i} active={active}>
+      <Header isOpen={isOpen} setExpanded={setExpanded} i={i} active={status}>
         <div>
-          <h3 className={styles.title}>Campaign {i + 1}</h3>
+          <h3 className={styles.title}>{name}</h3>
           <p className={styles.subtitle}>
             <span>Kraków</span>
             <GrFormLocation
@@ -47,14 +50,19 @@ CampaignTileProps) => {
                 fontSize: "1.2rem",
               }}
             />
-            <span>20km+</span>
+            <span>{radius}km+</span>
           </p>
         </div>
         <CheveronIcon isOpen={isOpen} />
-        <Switch active={active} />
+        <Switch active={status} />
       </Header>
       <Content isOpen={isOpen}>
-        <CampaignContent />
+        <CampaignContent
+          bidAmount={bidAmount}
+          campaignFund={campaignFund}
+          keywords={keywords}
+          name={name}
+        />
         <CampaignActions />
       </Content>
     </motion.article>
@@ -92,7 +100,6 @@ const Content = ({
   <AnimatePresence initial={false}>
     {isOpen && (
       <motion.div
-        key="content"
         initial="collapsed"
         animate="open"
         exit="collapsed"
