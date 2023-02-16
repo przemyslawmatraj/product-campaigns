@@ -19,10 +19,12 @@
   padding: 2rem;
   border-radius: 8px;
   position: relative;
+  min-height: 100vh;
 
   @media screen and (min-width: 768px) {
     max-width: 500px;
     width: 90%;
     margin: 0 auto;
+    min-height: revert;
   }
 }

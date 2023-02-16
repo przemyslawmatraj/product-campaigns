@@ -13,6 +13,20 @@ interface CampaignTileProps {
   active: boolean;
 }
 
+const child = {
+  hidden: { y: 20, opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      damping: 7,
+    },
+  },
+  exit: { y: 20, opacity: 0 },
+};
+
 const CampaignTile = ({
   i,
   expanded,
@@ -22,7 +36,7 @@ const CampaignTile = ({
 CampaignTileProps) => {
   const isOpen = i === expanded;
   return (
-    <article className={styles.wrapper}>
+    <motion.article variants={child} className={styles.wrapper}>
       <Header isOpen={isOpen} setExpanded={setExpanded} i={i} active={active}>
         <div>
           <h3 className={styles.title}>Campaign {i + 1}</h3>
@@ -43,7 +57,7 @@ CampaignTileProps) => {
         <CampaignContent />
         <CampaignActions />
       </Content>
-    </article>
+    </motion.article>
   );
 };
 

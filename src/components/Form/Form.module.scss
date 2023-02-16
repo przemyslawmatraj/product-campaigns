@@ -38,6 +38,16 @@
   display: block;
 }
 
+.visuallyHidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .button {
   border-radius: 10px;
   font-weight: 400;

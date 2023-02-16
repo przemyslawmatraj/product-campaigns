@@ -4,9 +4,11 @@ import { Control, FieldValues } from "react-hook-form";
 
 const towns = ["Kraków", "Warszawa"];
 
+const setValueAsString = (value: any) => (value === "" ? undefined : value);
+
 const TownField = ({
   control,
-  defaultValue = "",
+  defaultValue = towns[0],
 }: {
   control: Control<FieldValues, any>;
   defaultValue?: string;
@@ -46,11 +48,14 @@ const TownField = ({
                 button: {
                   color: "var(--clr-text-400)",
                 },
+                "& .MuiAutocomplete-clearIndicator": {
+                  display: "none",
+                },
               }}
             />
           )}
-          onChange={(e, data) => onChange(data)}
-          value={value}
+          onChange={(e, data) => onChange(setValueAsString(data))}
+          value={value || defaultValue}
         />
       )}
       defaultValue={defaultValue}
