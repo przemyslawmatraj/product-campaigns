@@ -2,33 +2,55 @@ import { motion } from "framer-motion";
 import styles from "./Switch.module.scss";
 import clsx from "clsx";
 import { useState } from "react";
+import { useQuery, useMutation } from "react-query";
+import { changeStatus } from "../../api/api";
+import { useQueryClient } from "react-query";
+import { useParams } from "react-router-dom";
+import type { Campaign } from "../../api/api";
 
-const Switch = ({ active, ...props }: { active: boolean }) => {
-  const [isOn, setIsOn] = useState(active);
+const Switch = ({ active, data }: { active: boolean; data: Campaign }) => {
+  const { id } = useParams();
+  const queryClient = useQueryClient();
+
+  const { mutate: changeStatusMutation } = useMutation(
+    (values: any) => changeStatus(values.data, values.status),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["campaigns", id]);
+      },
+    }
+  );
+
+  const onClick = () => {
+    changeStatusMutation({
+      data,
+      status: !active,
+    });
+  };
+
   return (
     <div className={styles.wrapper}>
       <motion.div
         animate={{
-          backgroundColor: isOn ? "var(--clr-primary)" : "var(--clr-bg-100)",
-          borderWidth: isOn ? "0px" : "1px",
+          backgroundColor: active ? "var(--clr-primary)" : "var(--clr-bg-100)",
+          borderWidth: active ? "0px" : "1px",
         }}
         className={styles.switch}
-        onClick={() => setIsOn(!isOn)}
-        {...props}
+        onClick={() => onClick()}
       >
         <motion.div
           animate={{
-            marginLeft: isOn ? "22px" : "0px",
+            marginLeft: active ? "22px" : "0px",
           }}
         />
       </motion.div>
       <motion.div
         animate={{
-          color: isOn ? "var(--clr-primary)" : "var(--clr-text-300)",
+          color: active ? "var(--clr-primary)" : "var(--clr-text-300)",
         }}
         className={styles.label}
       >
-        {isOn ? "On" : "Off"}
+        {active ? "On" : "Off"}
       </motion.div>
     </div>
   );

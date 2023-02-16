@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const campaignSchema = z.object({
+const campaignValidator = z.object({
   name: z.string().min(1),
   keywords: z.array(z.string()).min(1),
   bidAmount: z.number().min(100),
@@ -21,10 +21,19 @@ const campaignSchema = z.object({
 interface FormProps {
   type: "add" | "edit";
   setModalOpen: (modalOpen: boolean) => void;
-  campaignId?: any;
+  defaultValues?: any;
+
+  onFormSubmit: (data: any) => void;
 }
 
-const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
+const Form = ({
+  type,
+  setModalOpen,
+  onFormSubmit,
+  defaultValues,
+}: FormProps) => {
+  const [formStep, setFormStep] = useState(0);
+
   const {
     register,
     handleSubmit,
@@ -33,12 +42,19 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
     control,
   } = useForm({
     mode: "all",
-    resolver: zodResolver(campaignSchema),
+    resolver: zodResolver(campaignValidator),
+    defaultValues: {
+      name: defaultValues?.name || "",
+      bidAmount: defaultValues?.bidAmount || 100,
+      campaignFund: defaultValues?.campaignFund || 0,
+      town: defaultValues?.town || "",
+      keywords: defaultValues?.keywords || [],
+      radius: defaultValues?.radius || 0,
+    },
   });
-  const [formStep, setFormStep] = useState(0);
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    onFormSubmit(data);
   };
 
   return (
@@ -82,7 +98,11 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
                   {errors.keywords.message?.toString()}
                 </p>
               )}
-              <KeywordsField control={control} />
+              <KeywordsField
+                control={control}
+                defaultValues={defaultValues?.keywords}
+                // isDefaultValueLoading={isLoading}
+              />
             </label>
             <label
               htmlFor="bidAmount"
@@ -128,7 +148,10 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
                     {errors.town.message?.toString()}
                   </p>
                 )}
-                <TownField control={control} />
+                <TownField
+                  defaultValue={defaultValues?.town}
+                  control={control}
+                />
               </label>
             </label>
           </motion.div>
@@ -148,7 +171,7 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
                   {errors.town.message?.toString()}
                 </p>
               )}
-              <TownField control={control} />
+              <TownField control={control} defaultValue={defaultValues?.town} />
             </label>
             <label
               htmlFor="radius"
@@ -164,7 +187,7 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
                 type="text"
                 id="radius"
                 className={styles.input}
-                {...register("radious", {
+                {...register("radius", {
                   setValueAs: (v) =>
                     isNaN(v) || v === "" ? 0 : parseInt(v, 10),
                 })}
@@ -187,7 +210,6 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
           ) : formStep === 1 ? (
             <>
               <button
-                onClick={() => setModalOpen(false)}
                 type="submit"
                 className={clsx(styles.button, styles.submitButton, {
                   [styles.disabled]: !isValid,
@@ -211,7 +233,7 @@ const Form = ({ type, setModalOpen, campaignId }: FormProps) => {
           >
             Cancel
           </button>
-          {/* {JSON.stringify(watch(), null, 2)} */}
+          {JSON.stringify(watch(), null, 2)}
         </div>
       </motion.form>
     </AnimatePresence>

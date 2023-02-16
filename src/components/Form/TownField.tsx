@@ -1,24 +1,32 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { Control, FieldValues } from "react-hook-form";
-
-const towns = ["Kraków", "Warszawa"];
+import { useQuery } from "react-query";
+import { getTowns } from "../../api/api";
 
 const setValueAsString = (value: any) => (value === "" ? undefined : value);
 
 const TownField = ({
   control,
-  defaultValue = towns[0],
+  defaultValue,
+  idDefaultValuesLoading,
 }: {
   control: Control<FieldValues, any>;
   defaultValue?: string;
+  idDefaultValuesLoading?: boolean;
 }) => {
+  const { data: towns, isLoading } = useQuery("towns", getTowns);
+
+  if (idDefaultValuesLoading || isLoading) return <div>Loading...</div>;
+  if (!towns) return <div>No towns found</div>;
+
   return (
     <Controller
       render={({ field: { onChange, value } }) => (
         <Autocomplete
-          options={towns}
+          options={towns || []}
           getOptionLabel={(option) => option}
+          isOptionEqualToValue={(option, value) => option === value}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -55,7 +63,7 @@ const TownField = ({
             />
           )}
           onChange={(e, data) => onChange(setValueAsString(data))}
-          value={value || defaultValue}
+          defaultValue={defaultValue || towns[0]}
         />
       )}
       defaultValue={defaultValue}

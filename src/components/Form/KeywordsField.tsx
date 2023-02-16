@@ -1,21 +1,28 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { Control, FieldValues } from "react-hook-form";
+import { useQuery } from "react-query";
+import { getKeywords } from "../../api/api";
 
 const keywords = ["test", "test2", "test3"];
 
 const KeywordsField = ({
   control,
   defaultValues = [],
+  isDefaultValueLoading = false,
 }: {
   control: Control<FieldValues, any>;
-  defaultValues?: any;
+  defaultValues?: string[];
+  isDefaultValueLoading?: boolean;
 }) => {
+  const { data: keywords, isLoading } = useQuery("keywords", getKeywords);
+  if (isDefaultValueLoading) return <div>Loading...</div>;
+
   return (
     <Controller
       render={({ field: { onChange, value } }) => (
         <Autocomplete
-          options={keywords}
+          options={keywords || []}
           getOptionLabel={(option) => option}
           multiple
           isOptionEqualToValue={(option, value) => option === value}
@@ -51,7 +58,6 @@ const KeywordsField = ({
           )}
           defaultValue={defaultValues}
           onChange={(e, data) => onChange(data)}
-          value={value}
         />
       )}
       defaultValue={defaultValues}

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import Layout from "./components/Layout/Layout";
 import Products from "./pages/Products/Products";
@@ -18,6 +19,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

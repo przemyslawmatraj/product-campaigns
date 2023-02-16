@@ -35,7 +35,7 @@ const CampaignTile = ({
   data,
 }: CampaignTileProps) => {
   const isOpen = i === expanded;
-  const { status, name, town, radius, bidAmount, campaignFund, keywords } =
+  const { status, name, town, radius, bidAmount, campaignFund, keywords, id } =
     data;
 
   return (
@@ -44,7 +44,7 @@ const CampaignTile = ({
         <div>
           <h3 className={styles.title}>{name}</h3>
           <p className={styles.subtitle}>
-            <span>Kraków</span>
+            <span>{town}</span>
             <GrFormLocation
               style={{
                 fontSize: "1.2rem",
@@ -54,7 +54,7 @@ const CampaignTile = ({
           </p>
         </div>
         <CheveronIcon isOpen={isOpen} />
-        <Switch active={status} />
+        <Switch active={status} data={data} />
       </Header>
       <Content isOpen={isOpen}>
         <CampaignContent
@@ -63,7 +63,7 @@ const CampaignTile = ({
           keywords={keywords}
           name={name}
         />
-        <CampaignActions />
+        <CampaignActions campaignId={id} data={data} />
       </Content>
     </motion.article>
   );
@@ -137,7 +137,7 @@ const Header = ({
             backgroundColor: isOpen ? "var(--clr-bg-300)" : "var(--clr-bg-200)",
           }
         : {
-            backgroundColor: isOpen ? "var(--clr-bg-200)" : "transparent",
+            backgroundColor: "var(--clr-bg-100)",
           }
     }
     onClick={() => setExpanded(isOpen ? false : i)}
