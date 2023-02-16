@@ -11,7 +11,17 @@ const TownField = ({
   defaultValue,
   idDefaultValuesLoading,
 }: {
-  control: Control<FieldValues, any>;
+  control: Control<
+    {
+      name: any;
+      bidAmount: any;
+      campaignFund: any;
+      town: any;
+      keywords: any;
+      radius: any;
+    },
+    any
+  >;
   defaultValue?: string;
   idDefaultValuesLoading?: boolean;
 }) => {

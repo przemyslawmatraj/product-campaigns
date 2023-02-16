@@ -11,7 +11,17 @@ const KeywordsField = ({
   defaultValues = [],
   isDefaultValueLoading = false,
 }: {
-  control: Control<FieldValues, any>;
+  control: Control<
+    {
+      name: any;
+      bidAmount: any;
+      campaignFund: any;
+      town: any;
+      keywords: any;
+      radius: any;
+    },
+    any
+  >;
   defaultValues?: string[];
   isDefaultValueLoading?: boolean;
 }) => {
