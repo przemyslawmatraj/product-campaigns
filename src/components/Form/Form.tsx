@@ -47,7 +47,7 @@ const Form = ({
       name: defaultValues?.name || "",
       bidAmount: defaultValues?.bidAmount || 100,
       campaignFund: defaultValues?.campaignFund || 0,
-      town: defaultValues?.town || "",
+      town: defaultValues?.town || "Cracow",
       keywords: defaultValues?.keywords || [],
       radius: defaultValues?.radius || 0,
     },
@@ -101,7 +101,6 @@ const Form = ({
               <KeywordsField
                 control={control}
                 defaultValues={defaultValues?.keywords}
-                // isDefaultValueLoading={isLoading}
               />
             </label>
             <label
@@ -141,18 +140,6 @@ const Form = ({
                   setValueAs: (v) => (v === "" ? undefined : parseInt(v, 10)),
                 })}
               />
-              <label htmlFor="town" className={styles.visuallyHidden}>
-                Town
-                {errors.town && (
-                  <p className={styles.error}>
-                    {errors.town.message?.toString()}
-                  </p>
-                )}
-                <TownField
-                  defaultValue={defaultValues?.town}
-                  control={control}
-                />
-              </label>
             </label>
           </motion.div>
         )}

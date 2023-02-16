@@ -66,7 +66,7 @@ const TownField = ({
           defaultValue={defaultValue || towns[0]}
         />
       )}
-      defaultValue={defaultValue}
+      defaultValue={defaultValue || towns[0]}
       name="town"
       control={control}
     />
