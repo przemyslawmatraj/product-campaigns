@@ -7,6 +7,7 @@ import { changeStatus } from "../../api/api";
 import { useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import type { Campaign } from "../../api/api";
+import { toast } from "react-hot-toast";
 
 const Switch = ({ active, data }: { active: boolean; data: Campaign }) => {
   const { id } = useParams();
@@ -17,6 +18,7 @@ const Switch = ({ active, data }: { active: boolean; data: Campaign }) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["campaigns", id]);
+        toast.success("Status changed successfully");
       },
     }
   );

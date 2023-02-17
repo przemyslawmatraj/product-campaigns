@@ -13,6 +13,7 @@ import {
 import { useMutation, useQueryClient } from "react-query";
 import uuid from "react-uuid";
 import type { Campaign } from "../../api/api";
+import { toast } from "react-hot-toast";
 
 interface ModalProps {
   type: "add" | "edit";
@@ -55,6 +56,10 @@ const Modal = ({ type, modalOpen, setModalOpen, campaignId }: ModalProps) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["campaigns", id]);
+        toast.success("Campaign updated successfully");
+      },
+      onError: () => {
+        toast.error("Something went wrong");
       },
     }
   );
@@ -63,6 +68,10 @@ const Modal = ({ type, modalOpen, setModalOpen, campaignId }: ModalProps) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["campaigns", id]);
+        toast.success("Campaign created successfully");
+      },
+      onError: () => {
+        toast.error("Something went wrong");
       },
     }
   );

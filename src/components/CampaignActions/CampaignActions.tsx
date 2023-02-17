@@ -5,6 +5,7 @@ import { useMutation, useQueryClient, useQuery } from "react-query";
 import type { Campaign } from "../../api/api";
 import { deleteCampaign, deductEmeralds, getEmeralds } from "../../api/api";
 import { useParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const CampaignActions = ({
   campaignId,
@@ -25,6 +26,7 @@ const CampaignActions = ({
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["campaigns", id]);
+        toast.success("Campaign deleted successfully");
       },
     }
   );

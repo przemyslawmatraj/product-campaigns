@@ -4,6 +4,7 @@ import Amount from "../../components/Amount/Amount";
 import { BiArrowBack, BiHomeAlt } from "react-icons/bi";
 import { useQuery } from "react-query";
 import { getProductById } from "../../api/api";
+import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
   const { pathname } = useLocation();
@@ -12,29 +13,32 @@ const Layout = () => {
   const isProductPage = pathname.includes("product");
 
   return (
-    <main className={styles.container}>
-      <nav className={styles.navbar}>
-        {isProductPage ? (
-          <ProductNavbar id={id as string} />
-        ) : (
-          <>
-            <BiHomeAlt
-              style={{
-                fontSize: "1.5rem",
-                color: "white",
-                marginRight: "1rem",
-              }}
-            />
+    <>
+      <main className={styles.container}>
+        <nav className={styles.navbar}>
+          {isProductPage ? (
+            <ProductNavbar id={id as string} />
+          ) : (
+            <>
+              <BiHomeAlt
+                style={{
+                  fontSize: "1.5rem",
+                  color: "white",
+                  marginRight: "1rem",
+                }}
+              />
 
-            <h1 className={styles.title}>My Products</h1>
-            <Amount />
-          </>
-        )}
-      </nav>
-      <div className={styles.content}>
-        <Outlet />
-      </div>
-    </main>
+              <h1 className={styles.title}>My Products</h1>
+              <Amount />
+            </>
+          )}
+        </nav>
+        <div className={styles.content}>
+          <Outlet />
+        </div>
+      </main>
+      <Toaster position="top-center" reverseOrder={false} />
+    </>
   );
 };
 
