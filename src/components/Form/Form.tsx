@@ -13,9 +13,9 @@ const campaignValidator = z.object({
   name: z.string().min(1),
   keywords: z.array(z.string()).min(1),
   bidAmount: z.number().min(100),
-  campaignFund: z.number(),
+  campaignFund: z.number().min(0),
   town: z.string(),
-  radius: z.number().optional(),
+  radius: z.number().min(0).optional(),
 });
 
 interface FormProps {
@@ -164,7 +164,7 @@ const Form = ({
               htmlFor="radius"
               className={formStep === 1 ? styles.active : styles.inactive}
             >
-              Radius (in km)
+              Radius (in km) (optional)
               {errors.radius && (
                 <p className={styles.error}>
                   {errors.radius.message?.toString()}
@@ -220,7 +220,6 @@ const Form = ({
           >
             Cancel
           </button>
-          {JSON.stringify(watch(), null, 2)}
         </div>
       </motion.form>
     </AnimatePresence>
