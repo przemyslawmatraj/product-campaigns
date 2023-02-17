@@ -55,6 +55,7 @@ npm run dev
 
 This application needs backend - also clone down [THIS](https://github.com/przemyslawmatraj/product-campaigns_server) repository, and run on your machine.
 
+Remember to  create `.env` file in `product-campaigns` directory, then write `VITE_API_URL=http://localhost:5000` and save it.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
