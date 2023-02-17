@@ -32,7 +32,7 @@ Then install and run it locally.
 
 ```
 
-git clone https://github.com/przemyslawmatraj/Dobble-game.git
+git clone https://github.com/przemyslawmatraj/product-campaigns.git
 ```
 
 ```
